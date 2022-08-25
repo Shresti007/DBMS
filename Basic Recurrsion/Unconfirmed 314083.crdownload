@@ -1,0 +1,7 @@
+def Fibonacci(n):
+    """Implement the method below to calculate the nth fibonacci value."""
+
+
+if __name__ == '__main__':
+    nth_fibonacci = int(input())
+    print("Fibonacci value at position " + str(nth_fibonacci) + " is " + str(Fibonacci(nth_fibonacci)))
