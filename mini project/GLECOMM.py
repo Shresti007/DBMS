@@ -1,0 +1,61 @@
+import sqlite3
+conn = sqlite3.connect("GLECOM.DB")
+cur = conn.cursor()
+
+"""
+cur.execute("create table customer(customer_id int auto increment primary key, name text, username text, password text, city text, state text)");
+cur.execute("insert into customer values(1, 'shalini', 'sh@212', 'shalini123', 'Hyderabad','Sindi')")
+cur.execute("insert into customer values(2, 'Rabia', 'khan@12', 'al12345', 'Dubai','Saudi Arbia')")
+cur.execute("insert into customer values(3, 'gaurav', 'gupta@12', 'bo1234', 'Mumbai','Maharashtra')")
+cur.execute("insert into customer values(4, 'Vivek', 'beard@12', 'ch1234', 'Warangal','Pakistan')")
+cur.execute("insert into customer values(5, 'Suruchi', 'gupta@12', 'da1234', 'Bhubaneshwar','Orissa')")
+cur.execute("insert into customer values(6, 'Ankitgarg', 'garg@12', 'el1234', 'Kohima','Nagaland')")
+
+cur.execute("create table Vendor(v_id text primary key,  customer_id int, store_name text, contact_no text, constraint c_id foreign key(customer_id) references customer(customer_id))")
+cur.execute("insert into Vendor values('v01', 1, 'Grandiose','988738873')")
+cur.execute("insert into Vendor values('v02', 2, 'Purplle','988738867')")
+cur.execute("insert into Vendor values('v03', 2, 'Feather','988738237')")
+cur.execute("insert into Vendor values('v04', 3, 'Crisp','988732347')")
+cur.execute("insert into Vendor values('v05', 3, 'Creamstone','988733447')")
+cur.execute("insert into Vendor values('v06', 4, 'Archies','988733457')")
+
+cur.execute("create table Items(item_id text primary key, v_id text, item text, unit_price int, qty int, constraint vendor_id foreign key(v_id) references Vendor(v_id))")
+cur.execute("insert into Items values('i01', 'v01','Biscuits', 30, 40)")
+cur.execute("insert into Items values('i02', 'v02','Mango_juice', 40, 50)")
+cur.execute("insert into Items values('i03', 'v03','Apple_juice', 40, 50)")
+cur.execute("insert into Items values('i04', 'v03','Plastic_pots', 80, 50)")
+cur.execute("insert into Items values('i05', 'v01','Chair', 500, 50)")
+cur.execute("insert into Items values('i06', 'v01','Curtains', 400, 150)")
+cur.execute("insert into Items values('i07', 'v02','CFL_Bulbs', 400, 100)")
+cur.execute("insert into Items values('i08', 'v04','Baskets', 200, 100)")
+cur.execute("insert into Items values('i09', 'v04','Encyclopedia_books', 1000, 100)")
+cur.execute("insert into Items values('i10', 'v05','Speakers', 500, 100)")
+cur.execute("insert into Items values('i11', 'v05','Hard_disk', 500, 100)")
+cur.execute("insert into Items values('i12', 'v06','Water_bottles', 200, 100)")
+
+cur.execute("create table order_request(or_id int auto increment primary key, cust_id int, items_id text, items_quantity int, foreign key(cust_id) references customer(customer_id), foreign key(items_id) references Items(item_id))")
+cur.execute("insert into order_request values(1, 1, 'i01', 4)")
+cur.execute("insert into order_request values(2, 2, 'i05', 2)")
+cur.execute("insert into order_request values(3, 4, 'i02', 3)")
+cur.execute("insert into order_request values(4, 3, 'i03', 3)")
+cur.execute("insert into order_request values(5, 2, 'i05', 10)")
+cur.execute("insert into order_request values(6, 5, 'i07', 12)")
+cur.execute("insert into order_request values(7, 4, 'i12', 5)")
+cur.execute("insert into order_request values(8, 2, 'i04', 6)")
+cur.execute("insert into order_request values(9, 1, 'i10', 6)")
+cur.execute("insert into order_request values(10, 3, 'i11', 2)")
+
+cur.execute("create table orders as select order_request.or_id, order_request.cust_id, order_request.items_id, order_request.items_quantity, Items.unit_price from order_request inner join Items on Items.item_id=order_request.items_id")
+
+cur.execute("alter table orders add total_amount real null")
+cur.execute("update orders Set total_amount=unit_price*items_quantity")
+conn.commit()
+print ("Opened database successfully")
+
+"""
+conn = sqlite3.connect("GLECOM.DB")
+cur.execute("SELECT * FROM customer")
+cur.execute("select * from order_request")
+cur.execute("select * from orders")
+cur.execute("select * from customer")
+print(cur.fetchall())
